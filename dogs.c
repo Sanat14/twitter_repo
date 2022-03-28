@@ -1,15 +1,6 @@
-puppy
-canine
-wolf
-bark
-bow wow
-pikachu
-charmander
-squirtle
-bulbasaur
-charmelon
-charizard
-ivysaur
-venasaur
-wartortle
-blastoise
+#include <stdio.h>
+int main(void)
+{
+  int x=10;
+  return 0;
+}
