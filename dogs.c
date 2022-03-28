@@ -1,15 +1,7 @@
-/*puppy
-  canine
-  wolf
-  bark
-  bow wow
-  pikachu
-  charmander
-  squirtle
-  bulbasaur
-  charmelon
-  charizard
-  ivysaur
-  venasaur
-  wartortle
-  blastoise*/
+puppy
+canine
+wolf
+bark
+bow wow
+corgi
+shepherd
