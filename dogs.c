@@ -3,5 +3,13 @@
   wolf
   bark
   bow wow
-  corgi
-  shepherd */
+  pikachu
+  charmander
+  squirtle
+  bulbasaur
+  charmelon
+  charizard
+  ivysaur
+  venasaur
+  wartortle
+  blastoise*/
