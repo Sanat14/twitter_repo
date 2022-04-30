@@ -126,12 +126,10 @@ void delete(twitter *ts, user *curruser)
     auxDelete(ts, curruser);
     printf("%s has deleted their account", curruser);
     free(curruser);
-
 }
 void auxDelete(twitter *ts, user *curruser)
 {
     char tmpuser[USR_LENGTH];
-    int j = 0;
     for(int i = 0; i < curruser->num_followers; i++){
         strcpy(tmpuser,curruser->followers[i]);
         userPtr tmpptr = ts->headPtr;
@@ -139,13 +137,13 @@ void auxDelete(twitter *ts, user *curruser)
         {
             tmpptr = tmpptr->nextptr;
         }
-
-        while(strcasecmp(tmpptr->following[j],curruser->username)!=0){
-            j++;
+        int k = 0;
+        while(strcasecmp(tmpptr->following[k],curruser->username)!=0){
+            k++;
         }
-        for(int k = j+1; k < tmpptr->num_following; k++){
-            strcpy(tmpptr->following[j],tmpptr->following[k]);
-            j++;
+        for(int o = k+1; o < tmpptr->num_following; o++){
+            strcpy(tmpptr->following[k],tmpptr->following[o]);
+            k++;
         }
         tmpptr->num_following--;
     }
@@ -159,8 +157,8 @@ void auxDelete(twitter *ts, user *curruser)
         while(strcasecmp(tmpptr->followers[k],curruser->username)!=0){
             k++;
         }
-        for(int l = k+1; l < tmpptr->num_followers; l++){
-            strcpy(tmpptr->followers[k],tmpptr->followers[l]);
+        for(int o = k+1; o < tmpptr->num_followers; o++){
+            strcpy(tmpptr->followers[k],tmpptr->followers[o]);
             k++;
         }
         tmpptr->num_followers--;
@@ -189,20 +187,18 @@ void auxDelete(twitter *ts, user *curruser)
     }
 }
 
-void postTweet(twitter *ts, user* ptr)
+void postTweet(twitter *ts, user* userPtr)
 {
-    //int i = 0;
     tweetPtr currptr = malloc(sizeof(struct tweet));
-    printf("What's on your mind?\n");
+    printf("Enter your message.\n");
     fgets(currptr->msg, TWEET_LENGTH,stdin);
     currptr->id = tweetId;
     tweetId++;
-    //i++;
     fflush(stdin);
     if(currptr->msg[strlen(currptr->msg) - 1] == '\n') {
         currptr->msg[strlen(currptr->msg) - 1] = '\0';
     }
-    strcpy(currptr->user, ptr->username);
+    strcpy(currptr->user, userPtr->username);
     if(ts->tweetHeadPtr == NULL){
         ts->tweetHeadPtr = currptr;
         currptr->nextPtr = NULL;
@@ -215,25 +211,29 @@ void postTweet(twitter *ts, user* ptr)
 }
 void getNewsFeed(twitter *ts, user *currUser)
 {
-    tweetPtr currptr; //temp ptr
+    tweetPtr currptr;
     int count = 0;
     currptr = ts->tweetHeadPtr;
     while(currptr != NULL)
     {
-        for(int i=0;i<currUser->num_following;i++)
-        {
-            if (strcasecmp(currptr->user, currUser->following[i])==0 || strcasecmp(currptr->user, currUser->username)==0)
-            {
-                count++;
-                printf("%s\n", currptr->msg);
-//                printf("%d\n", currptr->id);
+        if(currUser->num_following>0) {
+            for (int i = 0; i < currUser->num_following; i++) {
+                if (strcasecmp(currptr->user, currUser->following[i]) == 0 ||strcasecmp(currptr->user, currUser->username) == 0)
+                {
+                    count++;
+                    printf("%s\n", currptr->msg);
+                    //                printf("%d\n", currptr->id);
+                }
             }
         }
 
-        if(currUser->num_following==0)
+        else
         {
-            printf("%s\n", currptr->msg);
-//            printf("%d\n", currptr->id);
+            if(strcasecmp(currptr->user, currUser->username)==0)
+            {
+                count++;
+                printf("%s\n", currptr->msg);
+            }
         }
         if(count==10)
         {
