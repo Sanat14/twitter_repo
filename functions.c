@@ -6,21 +6,21 @@
 
 void follow(twitter *ts, user *ptr)
 {
-    char mUser[USR_LENGTH];
-    printf("Enter user you want to Follow:\n");
+    char followUser[USR_LENGTH];
+    printf("Which user do you want to follow\n");
     fflush(stdin);
-    fgets(mUser, USR_LENGTH, stdin);
-    if(mUser[strlen(mUser) -1] == '\n')
+    fgets(followUser, USR_LENGTH, stdin);
+    if(followUser[strlen(followUser) -1] == '\n')
     {
-        mUser[strlen(mUser) - 1] = '\0';
+        followUser[strlen(followUser) - 1] = '\0';
     }
-    for(int d = 0; d < MAX_FOLLOWING; d++){
-        if(strcasecmp(mUser,ptr->username)==0){
-            printf("You are not allowed to follow yourself!\n Try entering a different user.\n");
+    for(int i = 0; i < MAX_FOLLOWING; i++){
+        if(strcasecmp(followUser,ptr->username)==0){
+            printf("You can't follow yourself!\n");
             return;
         }
-        if(strcasecmp(mUser,ptr->following[d])==0){
-            printf("You already follow this User!\n No point in following them twice!\n\n");
+        if(strcasecmp(followUser,ptr->following[i])==0){
+            printf("You already follow this User!\n");
             return;
         }
     }
@@ -29,7 +29,7 @@ void follow(twitter *ts, user *ptr)
     int user_check = 0;
     while(currptr != NULL)
     {
-        if(strcasecmp(currptr->username,mUser) == 0)
+        if(strcasecmp(currptr->username,followUser) == 0)
         {
             strcpy(ptr->following[ptr->num_following], currptr->username );
             ptr->num_following++;
@@ -42,13 +42,62 @@ void follow(twitter *ts, user *ptr)
             currptr = currptr->nextptr;
         }
     }
+    printf("you are now following %s\n", followUser);
     if(user_check == 0)
     {
-        puts("Username you have entered is not in the System! You will be returned to the menu Now!");
+        puts("User does not exist.");
         return;
     }
 }
-
+void unfollow(twitter *ts, user *ptr)
+{
+    char name[USR_LENGTH];
+    char null[USR_LENGTH];
+    userPtr currptr;
+    currptr = ts->headPtr;
+    for(int i = 0; i < USR_LENGTH; i++)
+    {
+        null[i] = '\0';
+    }
+    printf("\nWhich user do you want to unfollow:\n");
+    fflush(stdin);
+    fgets(name,USR_LENGTH,stdin);
+    char* p;
+    if((p= strchr(name,'\n'))!=NULL)
+    {
+        *p = '\0';
+    }
+    int check = 0;
+    for(int j = 0; j<ptr->num_following; j++){
+        if(strcmp(ptr->following[j], name) == 0)
+        {
+            strcpy(ptr->following[j], null);
+            ptr->num_following--;
+            check = 1;
+            break;
+        }
+    }
+    printf("You have unfollowed %s", name);
+    if(check == 0)
+    {
+        printf("You don't follow this user");
+        return;
+    }
+    while(currptr->nextptr != NULL)
+    {
+        if(strcasecmp(currptr->username, name) == 0){
+            break;
+        }
+        currptr = currptr->nextptr;
+    }
+    for(int k = 0; k < currptr->num_followers; k++){
+        if(strcmp(currptr->followers[k], ptr->username) == 0){
+            strcpy(currptr->followers[k], null);
+            currptr->num_followers--;
+            break;
+        }
+    }
+}
 void delete(twitter *ts, user *curruser)
 {
     userPtr tmp;
@@ -105,53 +154,6 @@ void auxDelete(twitter *ts, user *curruser)
     }
 }
 
-void unfollow(twitter *ts, user *ptr)
-{
-    char name[USR_LENGTH];
-    char null[USR_LENGTH];
-    userPtr currptr;
-    currptr = ts->headPtr;
-    for(int j = 0; j < USR_LENGTH; j++)
-    {
-        null[j] = '\0';
-    }
-    printf("\nEnter username of the user you would like to unfollow:\n");
-    fflush(stdin);
-    fgets(name,USR_LENGTH,stdin);
-    if(name[strlen(name) - 1] == '\n') {
-        name[strlen(name) - 1] = '\0';
-    }
-    int i, check = 0;
-    for(i = 0; ptr->num_following; i++){
-        if(strcmp(ptr->following[i], name) == 0)
-        {
-            strcpy(ptr->following[i], null);
-            ptr->num_following--;
-            check = 1;
-            break;
-        }
-    }
-    if(check == 0)
-    {
-        printf("Error, entered user not found.\n"
-               "You do not follow this User.\n");
-        return;
-    }
-    while(currptr->nextptr != NULL)
-    {
-        if(strcasecmp(currptr->username, name) == 0){
-            break;
-        }
-        currptr = currptr->nextptr;
-    }
-    for(int k = 0; k < currptr->num_followers; k++){
-        if(strcmp(currptr->followers[i], ptr->username) == 0){
-            strcpy(currptr->followers[i], null);
-            currptr->num_followers--;
-            break;
-        }
-    }
-}
 void postTweet(twitter *ts, user* ptr)
 {
     tweetPtr currptr = malloc(sizeof(struct tweet));
@@ -186,6 +188,11 @@ void getNewsFeed(twitter *ts, user *currUser)
                 tweet_check++;
                 printf("%s\n", currptr->msg);
             }
+        }
+
+        if(currUser->num_following==0)
+        {
+            printf("%s\n", currptr->msg);
         }
         if(tweet_check==10)
         {
