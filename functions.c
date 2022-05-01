@@ -222,6 +222,7 @@ void getNewsFeed(twitter *ts, user *currUser)
                     count++;
                     printf("\n%s\n", currptr->msg);
                     printf("Posted by %s, tweetID: %d\n", currptr->user,currptr->id );
+                    break;
                 }
             }
         }
@@ -234,6 +235,7 @@ void getNewsFeed(twitter *ts, user *currUser)
                 printf("\n%s\n", currptr->msg);
                 printf("Posted by %s, tweetID: %d\n", currptr->user,currptr->id);
             }
+
         }
         if(count==10)
         {
