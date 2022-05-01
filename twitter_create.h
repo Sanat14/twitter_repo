@@ -14,11 +14,6 @@
 //Max num of following users
 #define MAX_FOLLOWING 30
 
-//Max num of tweets in the news feed
-#define MAX_TWEETS 100
-
-//Max num of users
-#define MAX_USERS 100
 
 typedef struct tweet{
     int id;

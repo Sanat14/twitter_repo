@@ -12,16 +12,12 @@ void create_twitter_system(twitter * ts) {
     ts->tweetHeadPtr = NULL;
     printf("Enter the number of users you want to create:\n");
     scanf("%d", &num);
-    printf("Enter usernames\n");
+    printf("Enter their usernames\n");
     fflush(stdin);
     for (int i = 0; i < num; i++) {
         userPtr newptr = malloc(sizeof(user));
         if (newptr != NULL) {
-//            printf("\nEnter username of the next user or press 'tab key' then 'Enter' to exit:\n");
             fgets(newptr->username, USR_LENGTH, stdin);
-//            if (newptr->username[0] == '\t') {
-//                break;
-//            }
             if (newptr->username[strlen(newptr->username) - 1] == '\n') {
                 newptr->username[strlen(newptr->username) - 1] = '\0';
             }
@@ -31,7 +27,8 @@ void create_twitter_system(twitter * ts) {
         }
         if (ts->headPtr == NULL) {
             ts->headPtr = newptr;
-        } else {
+        }
+        else {
             currptr = ts->headPtr;
             while (currptr->nextptr != NULL) {
                 currptr = currptr->nextptr;
@@ -40,9 +37,10 @@ void create_twitter_system(twitter * ts) {
         }
     }
     currptr = ts->headPtr;
+    printf("Current Users on the system:\n");
+    puts("--------------------------------------------------------------------------");
     while (currptr != NULL) {
-        printf("User: %s        following: %d\tfollowers: %d\n", currptr->username, currptr->num_followers,
-               currptr->num_followers);
+        printf("\nUser:%s\t\t|  Following:%d\t    Followers:%d", currptr->username, currptr->num_following, currptr->num_followers);
         currptr = currptr->nextptr;
     }
     currptr = ts->headPtr;

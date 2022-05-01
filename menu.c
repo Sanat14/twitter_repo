@@ -7,7 +7,6 @@
 int menu(twitter *ts, user *sptr){
     int choice = -1;
     instructions();
-    //calling functions according to user choice
     while(choice != 0){
         printf("Enter your choice:\n");
         scanf("%d", &choice);
@@ -33,11 +32,10 @@ int menu(twitter *ts, user *sptr){
             case 7:
                 return 7;
             default:
-                printf("Error! Not an option!\n");
+                printf("Please select another option\n");
                 continue;
         }
     }
-    printf("Program will Self-Destruct now! Bye User:%s\n", sptr->username);
     return 7;
 }
 
