@@ -110,6 +110,7 @@ void unfollow(twitter *ts, user *ptr)
 }
 void delete(twitter *ts, user *curruser)
 {
+    printf("%s has deleted their account", curruser);
     userPtr tmp;
     tmp = ts->headPtr;
     if(curruser == ts->headPtr)
@@ -124,7 +125,6 @@ void delete(twitter *ts, user *curruser)
     }
     tmp->nextptr = curruser->nextptr;
     auxDelete(ts, curruser);
-    printf("%s has deleted their account", curruser);
     free(curruser);
 }
 void auxDelete(twitter *ts, user *curruser)
@@ -186,13 +186,12 @@ void auxDelete(twitter *ts, user *curruser)
         currtweet = currtweet->nextPtr;
     }
 }
-
 void postTweet(twitter *ts, user* userPtr)
 {
     tweetPtr currptr = malloc(sizeof(struct tweet));
     printf("Enter your message.\n");
     fgets(currptr->msg, TWEET_LENGTH,stdin);
-    currptr->id = tweetId;
+    currptr->id= tweetId;
     tweetId++;
     fflush(stdin);
     if(currptr->msg[strlen(currptr->msg) - 1] == '\n') {
@@ -221,8 +220,8 @@ void getNewsFeed(twitter *ts, user *currUser)
                 if (strcasecmp(currptr->user, currUser->following[i]) == 0 ||strcasecmp(currptr->user, currUser->username) == 0)
                 {
                     count++;
-                    printf("%s\n", currptr->msg);
-                    //                printf("%d\n", currptr->id);
+                    printf("\n%s\n", currptr->msg);
+                    printf("Posted by %s, tweetID: %d\n", currptr->user,currptr->id );
                 }
             }
         }
@@ -232,7 +231,8 @@ void getNewsFeed(twitter *ts, user *currUser)
             if(strcasecmp(currptr->user, currUser->username)==0)
             {
                 count++;
-                printf("%s\n", currptr->msg);
+                printf("\n%s\n", currptr->msg);
+                printf("Posted by %s, tweetID: %d\n", currptr->user,currptr->id);
             }
         }
         if(count==10)
