@@ -46,6 +46,6 @@ typedef struct twitter{
 
 } twitter;
 
-void create_twitter_system(twitter * ts); 
+void create_twitter_system(twitter * ts);
 
 #endif //PROJECT2_TWITTER_CREATE_H

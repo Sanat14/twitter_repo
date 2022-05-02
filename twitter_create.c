@@ -58,7 +58,7 @@ void create_twitter_system(twitter * ts){
 
     currptr = ts->headPtr;
     printf("Current Users on the system:\n");
-    puts("--------------------------------------------------------------------------");
+    printf("--------------------------------------------------------------------------");
 
     while (currptr != NULL){
 
