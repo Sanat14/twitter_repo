@@ -76,7 +76,7 @@ void unfollow(twitter *ts, user *ptr)
 
     }
     int i, userCheck = 0;
-    for(i = 0; ptr->num_following; i++){
+    for(i = 0; i<ptr->num_following; i++){
         if(strcmp(ptr->following[i], userUnf) == 0)
         {
             strcpy(ptr->following[i], empty);
