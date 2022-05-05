@@ -1,7 +1,7 @@
 
 
-#ifndef ENGPROJECT2_FUNCTIONS_H
-#define ENGPROJECT2_FUNCTIONS_H
+#ifndef ENGASSIGNMENT2_FUNCTIONS_H
+#define ENGASSIGNMENT2_FUNCTIONS_H
 
 #include "twitter_create.h"
 #include <string.h>
@@ -16,4 +16,4 @@ void auxDelete(twitter *ts, user *curruser);
 void postTweet(twitter *ts, user *userPtr);
 void getNewsFeed(twitter *ts, user *currUser);
 
-#endif //ENGPROJECT2_FUNCTIONS_H
+#endif //ENGASSIGNMENT2_FUNCTIONS_H
