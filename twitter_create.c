@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+//function that handles the twitter system
 void create_twitter_system(twitter * ts){
 
     int num;
@@ -23,8 +24,8 @@ void create_twitter_system(twitter * ts){
 
             fgets(newptr->username, USR_LENGTH, stdin);
 
-            if (newptr->username[strlen(newptr->username) - 1] == '\n'){
-
+            if (newptr->username[strlen(newptr->username) - 1] == '\n'){ //replacing newline with end of file terminator
+                                                                             //for comparison purposes
                 newptr->username[strlen(newptr->username) - 1] = '\0';
 
             }
@@ -73,7 +74,7 @@ void create_twitter_system(twitter * ts){
     while (1) {
 
         printf("\n\nCurrent User: %s\n", currptr->username);
-        choice = menu(ts, currptr);
+        choice = menu(ts, currptr); //calling menu to show all options
 
         if (choice == 6){
 

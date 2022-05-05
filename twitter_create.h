@@ -1,6 +1,6 @@
 
-#ifndef PROJECT2_TWITTER_CREATE_H
-#define PROJECT2_TWITTER_CREATE_H
+#ifndef ASSIGNMENT2_TWITTER_CREATE_H
+#define ASSIGNMENT2_TWITTER_CREATE_H
 
 //Max length of a tweet
 #define TWEET_LENGTH 270
@@ -14,7 +14,7 @@
 //Max num of following users
 #define MAX_FOLLOWING 30
 
-
+//initializing structures for twitter system
 typedef struct tweet{
 
     int id;
@@ -48,4 +48,4 @@ typedef struct twitter{
 
 void create_twitter_system(twitter * ts);
 
-#endif //PROJECT2_TWITTER_CREATE_H
+#endif //ASSIGNMENT2_TWITTER_CREATE_H

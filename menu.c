@@ -3,12 +3,12 @@
 #include "menu.h"
 #include <stdio.h>
 
+//menu for twitter system
 int menu(twitter *ts, user *sptr){
 
     int choice = -1;
     instructions();
 
-    //calling functions according to user choice
     while(choice != 0){
 
         printf("Enter your choice:\n");
