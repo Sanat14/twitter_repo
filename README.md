@@ -1,2 +1,3 @@
 # COMP10050
-Changes made to README.md
+Bhavya Bhatia (21206612)
+Sanat Dusad (21352231)
