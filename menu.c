@@ -3,12 +3,12 @@
 #include "menu.h"
 #include <stdio.h>
 
-//menu for twitter system
-int menu(twitter *ts, user *sptr){
+int menu(twitter *twitterApp, user *sptr){
 
     int choice = -1;
     instructions();
 
+    //menu for twitter system
     while(choice != 0){
 
         printf("Enter your choice:\n");
@@ -18,23 +18,23 @@ int menu(twitter *ts, user *sptr){
         switch (choice){
 
             case 1:
-                postTweet(ts, sptr);
+                postTweet(twitterApp, sptr);
                 return 1;
 
             case 2:
-                getNewsFeed(ts, sptr);
+                getNewsFeed(twitterApp, sptr);
                 return 2;
 
             case 3:
-                follow(ts, sptr);
+                follow(twitterApp, sptr);
                 return 3;
 
             case 4:
-                unfollow(ts, sptr);
+                unfollow(twitterApp, sptr);
                 return 4;
 
             case 5:
-                delete(ts, sptr);
+                delete(twitterApp, sptr);
                 return 6;
 
             case 6:

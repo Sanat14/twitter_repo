@@ -5,12 +5,12 @@
 #include <stdlib.h>
 
 //function that handles the twitter system
-void create_twitter_system(twitter * ts){
+void create_twitter_system(twitter * twitterApp){
 
     int num;
     userPtr currptr;
-    ts->headPtr = NULL;
-    ts->tweetHeadPtr = NULL;
+    twitterApp->headPtr = NULL;
+    twitterApp->tweetHeadPtr = NULL;
     printf("Enter the number of users you want to create:\n");
     scanf("%d", &num);
     printf("Enter their usernames: \n");
@@ -24,10 +24,9 @@ void create_twitter_system(twitter * ts){
 
             fgets(newptr->username, USR_LENGTH, stdin);
 
-            if (newptr->username[strlen(newptr->username) - 1] == '\n'){ //replacing newline with end of file terminator
-                                                                             //for comparison purposes
+            if (newptr->username[strlen(newptr->username) - 1] == '\n') {//replacing newline with end of file terminator
+                //for comparison purposes
                 newptr->username[strlen(newptr->username) - 1] = '\0';
-
             }
 
             newptr->num_followers = 0;
@@ -36,15 +35,15 @@ void create_twitter_system(twitter * ts){
 
         }
 
-        if (ts->headPtr == NULL){
+        if (twitterApp->headPtr == NULL){
 
-            ts->headPtr = newptr;
+            twitterApp->headPtr = newptr;
 
         }
 
         else{
 
-            currptr = ts->headPtr;
+            currptr = twitterApp->headPtr;
             while (currptr->nextptr != NULL){
 
                 currptr = currptr->nextptr;
@@ -57,9 +56,9 @@ void create_twitter_system(twitter * ts){
 
     }
 
-    currptr = ts->headPtr;
+    currptr = twitterApp->headPtr;
     printf("Current Users on the system:\n");
-    printf("--------------------------------------------------------------------------");
+    puts("--------------------------------------------------------------------------");
 
     while (currptr != NULL){
 
@@ -68,19 +67,19 @@ void create_twitter_system(twitter * ts){
 
     }
 
-    currptr = ts->headPtr;
+    currptr = twitterApp->headPtr;
     int choice;
 
     while (1) {
 
         printf("\n\nCurrent User: %s\n", currptr->username);
-        choice = menu(ts, currptr); //calling menu to show all options
+        choice = menu(twitterApp, currptr); //calling menu to show all options
 
         if (choice == 6){
 
             if (currptr->nextptr == NULL){
 
-                currptr = ts->headPtr;
+                currptr = twitterApp->headPtr;
 
             }
 

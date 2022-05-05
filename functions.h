@@ -1,5 +1,3 @@
-
-
 #ifndef ENGASSIGNMENT2_FUNCTIONS_H
 #define ENGASSIGNMENT2_FUNCTIONS_H
 
@@ -9,11 +7,12 @@
 #include <stdio.h>
 
 
-void follow(twitter *ts, user *ptr);
-void unfollow(twitter *ts, user *ptr);
-void delete(twitter *ts, user *curruser);
-void auxDelete(twitter *ts, user *curruser);
-void postTweet(twitter *ts, user *userPtr);
-void getNewsFeed(twitter *ts, user *currUser);
+void follow(twitter *twitterApp, user *ptr);
+void unfollow(twitter *twitterApp, user *ptr);
+void delete(twitter *twitterApp, user *curruser);
+void auxDelete(twitter *twitterApp, user *curruser);
+void postTweet(twitter *twitterApp, user *ptr);
+void getNewsFeed(twitter *twitterApp, user *currUser);
 
 #endif //ENGASSIGNMENT2_FUNCTIONS_H
+

@@ -14,7 +14,7 @@
 //Max num of following users
 #define MAX_FOLLOWING 30
 
-//initializing structures for twitter system
+
 typedef struct tweet{
 
     int id;
@@ -46,6 +46,6 @@ typedef struct twitter{
 
 } twitter;
 
-void create_twitter_system(twitter * ts);
+void create_twitter_system(twitter * twitterApp);
 
 #endif //ASSIGNMENT2_TWITTER_CREATE_H

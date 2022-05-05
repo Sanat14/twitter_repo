@@ -7,18 +7,19 @@
 
 int main()
 {
-    twitter ts;
+    twitter twitterApp;
     //Calling function which handles the entire twitter system.
-    create_twitter_system(&ts);
-    userPtr currptr = ts.headPtr;
+    create_twitter_system(&twitterApp);
+    userPtr currptr = twitterApp.headPtr;
     printf("Last Active Users: \n");
     printf("--------------------------------------------------------------------------\n");
 
-    if(ts.headPtr == NULL){
+    if(twitterApp.headPtr == NULL){
 
         exit(EXIT_SUCCESS);
 
     }
+
     //prints the last active users on the platform
     while(currptr != NULL){
 
