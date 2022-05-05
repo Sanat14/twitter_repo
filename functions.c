@@ -4,8 +4,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 int tweetId = 1;
 
+//initializing the function to follow a user
 void follow(twitter *ts, user *ptr){
 
     char followUser[USR_LENGTH];
@@ -16,12 +18,14 @@ void follow(twitter *ts, user *ptr){
 
     char* p;
 
+    //replacing the new line character with the null terminator
     if((p = strchr(followUser, '\n')) != NULL){
 
         *p = '\0';
 
     }
 
+    //conditions to ensure the user can't follow themselves or someone they already follow
     for(int i = 0; i < MAX_FOLLOWING; i++){
 
         if(strcasecmp(followUser, ptr->username) == 0){
@@ -44,6 +48,8 @@ void follow(twitter *ts, user *ptr){
     currptr = ts->headPtr;
     int userCheck = 0;
 
+    //loop to increment the number of followers and following
+    //and add modify the respective arrays
     while(currptr != NULL){
 
         if(strcasecmp(currptr->username, followUser) == 0){
@@ -71,6 +77,7 @@ void follow(twitter *ts, user *ptr){
 
     }
 
+    //condition to check if the user exists
     if(userCheck == 0){
 
         puts("User does not exist.");
@@ -80,6 +87,7 @@ void follow(twitter *ts, user *ptr){
 
 }
 
+//initializing the function to unfollow a user
 void unfollow(twitter *ts, user *ptr){
 
     char userUnf[USR_LENGTH];
@@ -87,6 +95,7 @@ void unfollow(twitter *ts, user *ptr){
     userPtr currptr;
     currptr = ts->headPtr;
 
+    //creating an empty array
     for(int j = 0; j < USR_LENGTH; j++){
 
         empty[j] = '\0';
@@ -98,6 +107,7 @@ void unfollow(twitter *ts, user *ptr){
     fgets(userUnf,USR_LENGTH,stdin);
     char* p;
 
+    //replacing the new line character with the null terminator
     if((p = strchr(userUnf, '\n')) != NULL){
 
         *p = '\0';
@@ -106,6 +116,7 @@ void unfollow(twitter *ts, user *ptr){
 
     int i, userCheck = 0;
 
+    //loop to decrease the number of following and modify the array
     for(i = 0; i < ptr->num_following; i++){
 
         if(strcmp(ptr->following[i], userUnf) == 0){
@@ -125,6 +136,7 @@ void unfollow(twitter *ts, user *ptr){
 
     }
 
+    //condition to check if the user entered was valid
     if(userCheck == 0){
 
         printf("You can only unfollow users you follow. Please enter a valid user");
@@ -144,6 +156,7 @@ void unfollow(twitter *ts, user *ptr){
 
     }
 
+    //loop to decrease the number of followers and modify the array
     for(int j = 0; j < currptr->num_followers; j++){
 
         if(strcmp(currptr->followers[j], ptr->username) == 0){
